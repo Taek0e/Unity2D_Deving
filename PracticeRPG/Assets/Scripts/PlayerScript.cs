@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using Cinemachine;
+
 
 public class PlayerScript : MonoBehaviour
 {
@@ -8,17 +11,26 @@ public class PlayerScript : MonoBehaviour
     public SpriteRenderer SR;
 
     public GameObject RightAtk;     
-    public GameObject LeftAtk;     
+    public GameObject LeftAtk;
+
+    public Image Health;
 
     bool isGround;
 
     float curtime = 0;     // 공격 쿨타임 설정변수
     float cooltime = 1f;   //
-    
+
+
+    void Awake()
+    {
+        var CM = GameObject.Find("CMcamera").GetComponent<CinemachineVirtualCamera>();
+        CM.Follow = transform;
+        CM.LookAt = transform;
+    }
 
 
 
-    
+
     void Update()
     {
         playerMove();
@@ -40,8 +52,6 @@ public class PlayerScript : MonoBehaviour
 
         if (horizontal != 0)
         SR.flipX = horizontal == -1;
-
-        Debug.Log(SR.flipX);
     }
 
     void playerJump()
@@ -54,6 +64,7 @@ public class PlayerScript : MonoBehaviour
             RB.AddForce(Vector3.up * 14f, ForceMode2D.Impulse);
         }
     }
+
 
 
     void playerAttack()
@@ -69,6 +80,7 @@ public class PlayerScript : MonoBehaviour
         else curtime -= Time.deltaTime;
     }
 
+    #region LorR_Atk()
     void LorR_Atk()
     {
         if (SR.flipX) // true == Left 공격
@@ -90,7 +102,7 @@ public class PlayerScript : MonoBehaviour
         LeftAtk.SetActive(false);
         RightAtk.SetActive(false);
     }
-    
+    #endregion
 
 
 }

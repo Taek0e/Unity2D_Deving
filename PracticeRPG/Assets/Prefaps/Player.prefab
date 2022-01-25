@@ -141,6 +141,7 @@ MonoBehaviour:
   SR: {fileID: 1343335218490467121}
   RightAtk: {fileID: 5357074233558758954}
   LeftAtk: {fileID: 2888067130975888821}
+  Health: {fileID: 1661564277235226207}
 --- !u!1 &2861020364561881275
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,6 +228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2303662560232112933}
   - component: {fileID: 2508854318288880983}
+  - component: {fileID: 8446491500371458800}
   m_Layer: 0
   m_Name: LeftAtk
   m_TagString: Untagged
@@ -274,6 +276,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5627935, y: 1.0519226}
   m_EdgeRadius: 0
+--- !u!114 &8446491500371458800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2888067130975888821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af3fa21f9f969b24ba5c7eafe2c2017c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerSR: {fileID: 1343335218490467121}
 --- !u!1 &5357074233558758954
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,6 +299,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3070119786162032752}
   - component: {fileID: 8769236068165912907}
+  - component: {fileID: 6687348252751829311}
   m_Layer: 0
   m_Name: RightAtk
   m_TagString: Untagged
@@ -331,6 +347,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5970341, y: 1.0519226}
   m_EdgeRadius: 0
+--- !u!114 &6687348252751829311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5357074233558758954}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af3fa21f9f969b24ba5c7eafe2c2017c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerSR: {fileID: 1343335218490467121}
 --- !u!1 &6160966973342632379
 GameObject:
   m_ObjectHideFlags: 0
