@@ -53,10 +53,11 @@
     <UnityVersion>2020.3.23f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\About_Monster\HitBoxScript.cs" />
     <Compile Include="Assets\Scripts\About_Player\PlayerATK.cs" />
+    <Compile Include="Assets\Scripts\About_Monster\SenserScript.cs" />
     <Compile Include="Assets\Scripts\About_Player\PlayerScript.cs" />
     <Compile Include="Assets\Scripts\About_Monster\MonsterScript.cs" />
-    <Compile Include="Assets\Scripts\About_Monster\HitBoxScript.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
