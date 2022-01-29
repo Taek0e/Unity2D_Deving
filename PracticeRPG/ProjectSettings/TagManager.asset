@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Monster
   - Ground
+  - NPC
+  - MonHitR
   layers:
   - Default
   - TransparentFX
