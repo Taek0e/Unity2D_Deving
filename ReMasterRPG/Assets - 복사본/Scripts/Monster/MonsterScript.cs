@@ -13,7 +13,7 @@ public class MonsterScript : MonoBehaviour
     public Image staminaUI;
     public Text staminaText;
 
-    void Update()
+    void FixedUpdate()
     {
         staminaText.text = $"{StaminaNow}";
         staminaUI.fillAmount = (StaminaNow) / (StaminaMax);

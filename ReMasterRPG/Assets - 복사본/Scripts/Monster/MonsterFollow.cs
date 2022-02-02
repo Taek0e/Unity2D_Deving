@@ -26,21 +26,24 @@ public class MonsterFollow : MonoBehaviour
     }
 
 
+    bool move = true;
     IEnumerator CoMove()
     {
-        yield return new WaitForSeconds(1f);
-        Dir = 1;
-        yield return new WaitForSeconds(2f);
-        Dir = 2;
-        yield return new WaitForSeconds(2f);
-        StartCoroutine("CoMove");
+        while (move)
+        {
+            yield return new WaitForSeconds(1f);
+            Dir = 1;
+            yield return new WaitForSeconds(2f);
+            Dir = 2;
+            yield return new WaitForSeconds(2f);
+        }
     }
 
     void OnTriggerStay2D(Collider2D col)
     {
         if (col.tag == "Player")
         {
-            StopCoroutine("CoMove");
+            move = false;
             if (col.transform.position.x - trans.position.x < 0)
             { 
                 if (col.transform.position.x + 1f >= trans.position.x) Dir = 0;
@@ -60,7 +63,7 @@ public class MonsterFollow : MonoBehaviour
     {
         if (col.tag == "Player")
         {
-            StartCoroutine("CoMove");
+            move = true;
         }
     }
 

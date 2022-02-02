@@ -140,6 +140,8 @@ MonoBehaviour:
   SR: {fileID: 2895635360145616602}
   staminaUI: {fileID: 0}
   staminaText: {fileID: 0}
+  manaUI: {fileID: 0}
+  manaText: {fileID: 0}
   LeftAttack: {fileID: 4416532722884642814}
   RightAttack: {fileID: 4538610458142467657}
 --- !u!1 &4416532722884642814

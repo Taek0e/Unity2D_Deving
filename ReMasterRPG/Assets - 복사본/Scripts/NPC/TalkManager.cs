@@ -22,10 +22,22 @@ public class TalkManager : MonoBehaviour
     }
 
 
+
+    public void TalkBtn()
+    {
+        Accept = true;
+        TalkButton.SetActive(false);
+        PlayerButton.SetActive(false);
+        Time.timeScale = 0;
+    }
+
+
     void Update()
     {
         if (Accept) Talking();
     }
+
+
 
 
     bool Accept = false;
@@ -33,8 +45,6 @@ public class TalkManager : MonoBehaviour
 
     string[] talkAbout;
     int talkLength;
-
-
     void Talking()
     {
         if (Input.GetMouseButtonDown(0) || i == -1)
@@ -56,13 +66,7 @@ public class TalkManager : MonoBehaviour
     }
 
 
-    public void TalkBtn() 
-    {
-        Accept = true;
-        TalkButton.SetActive(false);
-        PlayerButton.SetActive(false);
-        Time.timeScale = 0;
-    } 
+    
 
    
     
