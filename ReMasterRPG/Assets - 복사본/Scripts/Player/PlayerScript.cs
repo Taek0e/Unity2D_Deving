@@ -5,24 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
-    // 플레이어 스탯
-    static public float StaminaNow = 100f;
-    static public float StaminaMax = 100f;
-    static public float PlusStamina = 0f;
-
-    static public float ManaNow = 100f;
-    static public float ManaMax = 100f;
-    static public float PlusMana = 0f;
-
-    static public float AttackForce = 30f;
-    static public float PlusAttackForce = 0f;
-
-    static public float JumpForce = 14f;
-    static public float MoveForce = 7f;
-
-
-
-
+   
     public Rigidbody2D RB;
     public SpriteRenderer SR;
 
@@ -51,18 +34,18 @@ public class PlayerScript : MonoBehaviour
 
     void PlayerStaminaManaUI() 
     {
-        staminaText.text = $"{StaminaNow} / {StaminaMax}";
-        staminaUI.fillAmount = (StaminaNow + PlusStamina) / (StaminaMax + PlusStamina);
+        staminaText.text = $"{PlayerData.StaminaNow} / {PlayerData.StaminaMax}";
+        staminaUI.fillAmount = (PlayerData.StaminaNow + PlayerData.PlusStamina) / (PlayerData.StaminaMax + PlayerData.PlusStamina);
 
-        manaText.text = $"{ManaNow} / {ManaMax}";
-        manaUI.fillAmount = (ManaNow + PlusMana) / (ManaMax + PlusMana);
+        manaText.text = $"{PlayerData.ManaNow} / {PlayerData.ManaMax}";
+        manaUI.fillAmount = (PlayerData.ManaNow + PlayerData.PlusMana) / (PlayerData.ManaMax + PlayerData.PlusMana);
     }
 
     public void Hit()
     {
-        StaminaNow -= MonsterScript.AttackForce;
+        PlayerData.StaminaNow -= MonsterData.AttackForce;
 
-        if (StaminaNow <= 0) PlayerDie();
+        if (PlayerData.StaminaNow <= 0) PlayerDie();
     }
 
 
@@ -73,13 +56,14 @@ public class PlayerScript : MonoBehaviour
     {
         if (curtime <= 0)
         {
-            if (StaminaMax - StaminaNow > 0) StaminaNow += 3f; // 0.5초당 3f 체젠
+            if (PlayerData.StaminaMax - PlayerData.StaminaNow > 0)   PlayerData.StaminaNow += 3f; // 0.5초당 3f 체젠
 
-            if (StaminaMax < StaminaNow) StaminaNow += StaminaMax - StaminaNow;
+            if (PlayerData.StaminaMax < PlayerData.StaminaNow)   PlayerData.StaminaNow += PlayerData.StaminaMax - PlayerData.StaminaNow;
 
-            if (ManaMax - ManaNow > 0) ManaNow += 2f;  // 0,5초당 2f 마젠
 
-            if (ManaMax < ManaNow) ManaNow += ManaMax - ManaNow;
+            if (PlayerData.ManaMax - PlayerData.ManaNow > 0)   PlayerData.ManaNow += 2f;  // 0,5초당 2f 마젠
+
+            if (PlayerData.ManaMax < PlayerData.ManaNow)   PlayerData.ManaNow += PlayerData.ManaMax - PlayerData.ManaNow;
 
             curtime = regenCool;
         }
@@ -98,7 +82,7 @@ public class PlayerScript : MonoBehaviour
     void PlayerMove()
     {
         if (Dir != 0) SR.flipX = (Dir == -1);
-        RB.velocity = (new Vector2(Dir * MoveForce, RB.velocity.y));
+        RB.velocity = (new Vector2(Dir * PlayerData.MoveForce, RB.velocity.y));
     }
 
     bool isGround;
@@ -109,7 +93,7 @@ public class PlayerScript : MonoBehaviour
         if (isGround)
         {
             RB.velocity = Vector2.zero;
-            RB.AddForce(Vector2.up * JumpForce, ForceMode2D.Impulse);
+            RB.AddForce(Vector2.up * PlayerData.JumpForce, ForceMode2D.Impulse);
         }
     }
     
@@ -157,9 +141,27 @@ public class PlayerScript : MonoBehaviour
 
     void PlayerDie()
     {
-        StaminaNow = 0;
-        staminaText.text = $"0 / {StaminaMax}";
+        PlayerData.StaminaNow = 0;
+        staminaText.text = $"0 / {PlayerData.StaminaMax}";
         staminaUI.fillAmount = 0f;
         Destroy(gameObject);
     }
+}
+
+
+public class PlayerData  // 플레이어 스탯관리 데이터 클래스
+{
+    static public float StaminaNow = 100f;
+    static public float StaminaMax = 100f;
+    static public float PlusStamina = 0f;
+
+    static public float ManaNow = 100f;
+    static public float ManaMax = 100f;
+    static public float PlusMana = 0f;
+
+    static public float AttackForce = 30f;
+    static public float PlusAttackForce = 0f;
+
+    static public float JumpForce = 14f;
+    static public float MoveForce = 7f;
 }
