@@ -35,15 +35,15 @@ public class PlayerScript : MonoBehaviour
     void PlayerStaminaManaUI() 
     {
         staminaText.text = $"{PlayerData.StaminaNow} / {PlayerData.StaminaMax}";
-        staminaUI.fillAmount = (PlayerData.StaminaNow + PlayerData.PlusStamina) / (PlayerData.StaminaMax + PlayerData.PlusStamina);
+        staminaUI.fillAmount = (PlayerData.StaminaNow) / (PlayerData.StaminaMax);
 
         manaText.text = $"{PlayerData.ManaNow} / {PlayerData.ManaMax}";
-        manaUI.fillAmount = (PlayerData.ManaNow + PlayerData.PlusMana) / (PlayerData.ManaMax + PlayerData.PlusMana);
+        manaUI.fillAmount = (PlayerData.ManaNow) / (PlayerData.ManaMax);
     }
 
-    public void Hit()
+    public void Hit(float AttackValue)
     {
-        PlayerData.StaminaNow -= MonsterData.AttackForce;
+        PlayerData.StaminaNow -= AttackValue;
 
         if (PlayerData.StaminaNow <= 0) PlayerDie();
     }
@@ -153,14 +153,16 @@ public class PlayerData  // 플레이어 스탯관리 데이터 클래스
 {
     static public float StaminaNow = 100f;
     static public float StaminaMax = 100f;
-    static public float PlusStamina = 0f;
 
     static public float ManaNow = 100f;
     static public float ManaMax = 100f;
-    static public float PlusMana = 0f;
 
     static public float AttackForce = 30f;
-    static public float PlusAttackForce = 0f;
+
+    static public float ExperienceMax = 100f;
+    static public float ExperienceNow = 0f;
+
+    static public int Level = 0;
 
     static public float JumpForce = 14f;
     static public float MoveForce = 7f;

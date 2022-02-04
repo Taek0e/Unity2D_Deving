@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class MonsterAttack : MonoBehaviour
 {
+    public float AttackForce = 0;
 
     void Start() => StartCoroutine("AttackTime");
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Player") col.GetComponent<PlayerScript>().Hit();
+        if (col.tag == "Player") col.GetComponent<PlayerScript>().Hit(AttackForce);
     }
 
     
