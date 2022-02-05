@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BladeScript : MonoBehaviour
-{
-    public Rigidbody2D RB;   
+{ 
     int dir;    
 
 
@@ -16,9 +15,9 @@ public class BladeScript : MonoBehaviour
         StartCoroutine("DestroyBlade");
     }
 
-    void FixedUpdate()
+    void Update()
     {
-        RB.velocity = Vector2.right * dir * 6f;
+        transform.position += new Vector3(1, 0, 0) * dir * 6f * Time.deltaTime;
     }
 
 

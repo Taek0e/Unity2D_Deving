@@ -12,8 +12,10 @@ public class TalkManager : MonoBehaviour
     public GameObject PlayerButton;
 
 
-    
-    
+
+
+    string[] talkAbout;
+    int talkLength;
     public void StartTalk(string[] text, int length)
     {
         talkAbout = text;
@@ -43,8 +45,6 @@ public class TalkManager : MonoBehaviour
     bool Accept = false;
     int i;
 
-    string[] talkAbout;
-    int talkLength;
     void Talking()
     {
         if (Input.GetMouseButtonDown(0) || i == -1)

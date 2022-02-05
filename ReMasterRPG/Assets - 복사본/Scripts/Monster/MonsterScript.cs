@@ -9,7 +9,6 @@ public class MonsterScript : MonoBehaviour
     public float StaminaMax = 0f;
 
 
-    public GameObject ExManager;
     public Rigidbody2D RB;
     public Image staminaUI;
     public Text staminaText;
@@ -36,20 +35,21 @@ public class MonsterScript : MonoBehaviour
             staminaText.text = "0";
             staminaUI.fillAmount = 0f;
             Destroy(gameObject);
-            ExManager.GetComponent<ExperienceManager>().PlusEx(20f);
+            GameObject.Find("ExManager").GetComponent<ExperienceManager>().PlusEx(50f);
         }
     }
 
     public void skillHit()
     {
         StaminaNow -= 50f;
+
         if (StaminaNow <= 0)
         {
             StaminaNow = 0;
             staminaText.text = "0";
             staminaUI.fillAmount = 0f;
             Destroy(gameObject);
-            ExManager.GetComponent<ExperienceManager>().PlusEx(20f);
+            GameObject.Find("ExManager").GetComponent<ExperienceManager>().PlusEx(50f);
         }
     }
 }

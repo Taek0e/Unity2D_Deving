@@ -145,6 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd937ec4815c1f44ae02bf0790f5bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackForce: 0
 --- !u!1 &4489197193365753409
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,7 +159,7 @@ GameObject:
   - component: {fileID: 4489197193365753422}
   - component: {fileID: 4489197193365753421}
   - component: {fileID: 2466036161306477902}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Monster
   m_TagString: Monster
   m_Icon: {fileID: 0}
@@ -292,6 +293,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fe41ab94741f1a4a8d7cf2387b8b13d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StaminaNow: 0
+  StaminaMax: 0
   RB: {fileID: 4489197193365753421}
   staminaUI: {fileID: 4158591850819208156}
   staminaText: {fileID: 453046507050095912}

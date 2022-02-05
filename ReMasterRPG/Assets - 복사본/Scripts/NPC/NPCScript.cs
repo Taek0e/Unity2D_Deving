@@ -8,8 +8,9 @@ public class NPCScript : MonoBehaviour
     public string[] TalkText;
     public TalkManager talkManager;
 
-
     public GameObject TalkButton;
+
+
 
     void OnTriggerEnter2D(Collider2D col)
     {
