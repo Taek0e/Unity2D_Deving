@@ -41,7 +41,7 @@ public class MonsterScript : MonoBehaviour
 
     public void skillHit()
     {
-        StaminaNow -= 50f;
+        StaminaNow -= 50f + (PlayerData.AttackForce / 2);
 
         if (StaminaNow <= 0)
         {

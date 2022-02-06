@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    
+
 
     void Start()
     {
-        if (PlayerPrefs.HasKey("HasData")) 
-        OnData();
+        if (PlayerPrefs.HasKey("HasData")) OnData();
     }
 
     
 
     void OnData()
     {
+        PlayerData.NickName = PlayerPrefs.GetString("NickName");
+        PlayerData.Job = PlayerPrefs.GetString("Job");
+
         PlayerData.AttackForce = PlayerPrefs.GetFloat("AttackForce");
 
         PlayerData.StaminaMax = PlayerPrefs.GetFloat("StaminaMax");
@@ -28,4 +33,8 @@ public class GameManager : MonoBehaviour
 
         PlayerData.Level = PlayerPrefs.GetInt("Level");
     }
+
+
+
+ 
 }

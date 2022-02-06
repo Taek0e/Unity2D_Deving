@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ExperienceManager : MonoBehaviour
 {
     public Image ExperienceImage;
     public Text LevelText;
-    
 
+    public InputField NickName;
+
+
+    
 
     void Update()
     {
@@ -41,6 +45,15 @@ public class ExperienceManager : MonoBehaviour
 
         PlayerData.StaminaNow = PlayerData.StaminaMax;
         PlayerData.ManaNow = PlayerData.ManaMax;
+
+        switch(PlayerData.Level)
+        {
+            case 4: PlayerData.Job = "Just swordsmen"; break;
+
+            case 8: PlayerData.Job = "Magic swordsmen"; break;
+
+            default: break;
+        }
     }
 
 
@@ -49,6 +62,10 @@ public class ExperienceManager : MonoBehaviour
     public void SaveData()
     {
         PlayerPrefs.SetInt("HasData", 0);
+
+
+        PlayerPrefs.SetString("NickName", PlayerData.NickName);
+        PlayerPrefs.SetString("Job", PlayerData.Job);
 
         PlayerPrefs.SetFloat("AttackForce", PlayerData.AttackForce);
 
@@ -62,6 +79,7 @@ public class ExperienceManager : MonoBehaviour
         PlayerPrefs.SetFloat("ExperienceNow", PlayerData.ExperienceNow);
 
         PlayerPrefs.SetInt("Level", PlayerData.Level);
+
         PlayerPrefs.Save();
     }
 
@@ -71,5 +89,11 @@ public class ExperienceManager : MonoBehaviour
     public void DeleteAll()
     {
         PlayerPrefs.DeleteAll();
+    }
+
+    public void GameStartBtn()
+    {
+        PlayerData.NickName = NickName.text;
+        SceneManager.LoadScene("GameScene");
     }
 }

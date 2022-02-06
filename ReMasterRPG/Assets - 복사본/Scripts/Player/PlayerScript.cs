@@ -151,6 +151,9 @@ public class PlayerScript : MonoBehaviour
 
 public class PlayerData  // 플레이어 스탯관리 데이터 클래스
 {
+    static public string Job = "Weak swordsmen";
+    static public string NickName = "";
+
     static public float StaminaNow = 100f;
     static public float StaminaMax = 100f;
 

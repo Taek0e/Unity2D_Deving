@@ -17,13 +17,14 @@ public class SkillManager : MonoBehaviour
 
             if (PlayerSR.flipX)
             {
-                Instantiate(BladeObject, new Vector3(PlayerTrans.position.x - 2, PlayerTrans.position.y, PlayerTrans.position.z), Quaternion.identity);
                 BladeObject.GetComponent<SpriteRenderer>().flipX = true;
+                Instantiate(BladeObject, new Vector3(PlayerTrans.position.x - 2, PlayerTrans.position.y, PlayerTrans.position.z), Quaternion.identity);
+                
             }
             else
             {
-                Instantiate(BladeObject, new Vector3(PlayerTrans.position.x + 2, PlayerTrans.position.y, PlayerTrans.position.z), Quaternion.identity);
                 BladeObject.GetComponent<SpriteRenderer>().flipX = false;
+                Instantiate(BladeObject, new Vector3(PlayerTrans.position.x + 2, PlayerTrans.position.y, PlayerTrans.position.z), Quaternion.identity);
             }
         }
     }
