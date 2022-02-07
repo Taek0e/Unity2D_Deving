@@ -633,7 +633,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Slime
+  m_Text: Zombie
 --- !u!1 &7192478871699114386
 GameObject:
   m_ObjectHideFlags: 0
