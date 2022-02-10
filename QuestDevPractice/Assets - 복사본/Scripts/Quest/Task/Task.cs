@@ -11,8 +11,8 @@ public enum TaskState
     Complete
 }
 
-
 [CreateAssetMenu(menuName = "Quest/Task/Task", fileName = "Task_")]
+
 public class Task : ScriptableObject
 {
     #region Events
@@ -43,11 +43,13 @@ public class Task : ScriptableObject
     private InitialSuccessValue initialSuccessValue;
     [SerializeField]
     private int needSuccessToComplete;
+    [SerializeField]
+    private bool canReceiveReportsDuringCompletion;
 
 
     private TaskState state;
 
-    public int currentSuccess;
+    private int currentSuccess;
 
     public event StateChangedHandler onStateChanged;
     public event SuccessChangedHandler onSuccessChanged;
@@ -63,7 +65,7 @@ public class Task : ScriptableObject
             if (currentSuccess != prevSuccess)
             {
                 State = currentSuccess == needSuccessToComplete ? TaskState.Complete : TaskState.Running;
-                onSuccessChanged?.Invoke(this, currentSuccess, prevSuccess);
+                onSuccessChanged ?.Invoke(this, currentSuccess, prevSuccess);
             }
         }
     }
@@ -80,7 +82,7 @@ public class Task : ScriptableObject
         {
             var prevState = state;
             state = value;
-            onStateChanged?.Invoke(this, state, prevState);  // onStateChanged가 null이 아니라면 Invoke() 실행
+            onStateChanged ?.Invoke(this, state, prevState);  // onStateChanged가 null이 아니라면 Invoke() 실행
         }
     }
 
@@ -88,14 +90,18 @@ public class Task : ScriptableObject
 
     public Quest Owner { get; private set; }
 
-    public void Setup(Quest quest)
+    public void Setup(Quest owner)
     {
-        Owner = quest;
+        Owner = owner;
     }
 
+   
     public void Start()
     {
-        State = TaskState.Running; 
+        State = TaskState.Running;
+        if (initialSuccessValue)
+            CurrentSuccess = initialSuccessValue.GetValue(this);
+
     }
 
     public void End()
@@ -110,10 +116,15 @@ public class Task : ScriptableObject
         
     }
 
+    public void Complete()
+    {
+        CurrentSuccess = needSuccessToComplete;
+    }
+
     public bool IsTarget(string category, object target)
-        => Category == category ||
+        => Category == category &&
         targets.Any(x => x.IsEqual(target)) &&
-        !IsComplete; 
+        (!IsComplete || (IsComplete && canReceiveReportsDuringCompletion)); 
 
 
 
