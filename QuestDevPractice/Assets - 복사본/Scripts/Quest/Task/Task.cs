@@ -47,12 +47,22 @@ public class Task : ScriptableObject
     private bool canReceiveReportsDuringCompletion;
 
 
+
     private TaskState state;
 
     private int currentSuccess;
 
     public event StateChangedHandler onStateChanged;
     public event SuccessChangedHandler onSuccessChanged;
+
+
+
+
+
+
+
+
+
 
     public int CurrentSuccess
     {
@@ -89,6 +99,16 @@ public class Task : ScriptableObject
     public bool IsComplete => State == TaskState.Complete;
 
     public Quest Owner { get; private set; }
+
+
+
+
+
+
+
+
+
+
 
     public void Setup(Quest owner)
     {
