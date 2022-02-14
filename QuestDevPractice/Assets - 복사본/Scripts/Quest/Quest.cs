@@ -54,7 +54,6 @@ public class Quest : ScriptableObject
     [SerializeField]
     private bool isCancelable;
     
-
     [Header("Condition")]
     [SerializeField]
     private Condition[] acceptionConditions;
@@ -77,14 +76,15 @@ public class Quest : ScriptableObject
     public string DisplayName => displayName;
     public string Description => description;
     public QuestState State { get; private set; }
+
     public TaskGroup CurrentTaskGroup => taskGroups[currentTaskGroupIndex];
     public IReadOnlyList<TaskGroup> TaskGroups => taskGroups;
     public IReadOnlyList<Reward> Rewards => rewards;
     public bool IsRegistered => State != QuestState.Inactive;
     public bool IsCompletable => State == QuestState.WaitingForCompletion;
     public bool IsComplete => State == QuestState.Complete;
-    public bool IsCancel => State == QuestState.Cancel && cancelConditions.All(x => x.IsPass(this));
-    public bool IsCancelAble => isCancelable;
+    public bool IsCancel => State == QuestState.Cancel;
+    public virtual bool IsCancelAble => isCancelable && cancelConditions.All(x => x.IsPass(this));
     public bool IsAcceptable => acceptionConditions.All(x => x.IsPass(this));
     
 
@@ -104,8 +104,6 @@ public class Quest : ScriptableObject
 
     public void OnRegister()
     {
-        
-
         Debug.Assert(IsRegistered, "This quest has already been registered.");
             
         foreach (var taskGroup in taskGroups)
@@ -117,8 +115,8 @@ public class Quest : ScriptableObject
 
         State = QuestState.Running;
         CurrentTaskGroup.Start();
-            
     }
+
 
     public void ReceiveReport(string category, object target, int successCount)
     {
@@ -174,7 +172,7 @@ public class Quest : ScriptableObject
         onNewTaskGroup = null;
     }
 
-    public void Cancel()
+    public virtual void Cancel()
     {
         CheckIsRunning();
         Debug.Assert(isCancelable, "This quest can't be canceled.");
