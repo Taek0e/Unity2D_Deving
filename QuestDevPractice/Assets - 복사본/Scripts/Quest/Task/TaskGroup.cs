@@ -25,8 +25,10 @@ public class TaskGroup
     public TaskGroupState State { get; private set; }
     public bool IsComplete => State == TaskGroupState.Complete;
     
-
-
+    public TaskGroup(TaskGroup copyTarget)
+    {
+        tasks = copyTarget.Tasks.Select(x => Object.Instantiate(x)).ToArray();
+    }   
 
 
 

@@ -23,6 +23,7 @@ public class QuestDatabase : ScriptableObject
     {
         FindQuestsBy<Quest>(); 
     }
+
     [ContextMenu("FindAchievements")]
     private void FindAchievements()
     {
