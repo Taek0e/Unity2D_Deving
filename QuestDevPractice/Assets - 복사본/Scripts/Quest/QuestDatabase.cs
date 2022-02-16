@@ -17,7 +17,7 @@ public class QuestDatabase : ScriptableObject
 
     public Quest FindQuestBy(string codeName) => quests.FirstOrDefault(x => x.CodeName == codeName);
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR    
     [ContextMenu("FindQuests")]
     private void FindQuests()
     {

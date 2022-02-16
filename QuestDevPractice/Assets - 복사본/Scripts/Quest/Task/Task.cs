@@ -92,7 +92,7 @@ public class Task : ScriptableObject
         {
             var prevState = state;
             state = value;
-            onStateChanged ?.Invoke(this, state, prevState);  // onStateChanged가 null이 아니라면 Invoke() 실행
+            onStateChanged ?.Invoke(this, state, prevState);  
         }
     }
 
@@ -121,7 +121,6 @@ public class Task : ScriptableObject
         State = TaskState.Running;
         if (initialSuccessValue)
             CurrentSuccess = initialSuccessValue.GetValue(this);
-
     }
 
     public void End()
@@ -133,7 +132,6 @@ public class Task : ScriptableObject
     public void ReceieveReport(int successCount)
     {
         CurrentSuccess = action.Run(this, CurrentSuccess, successCount);
-        
     }
 
     public void Complete()

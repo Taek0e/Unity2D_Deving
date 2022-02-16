@@ -52,7 +52,7 @@ public class QuestSystem : MonoBehaviour
 
     public event QuestRegisteredHandler onAchievementRegistered;
     public event QuestCompletedHandler onAchievementCompleted;
-    public event QuestCanceledHandler onAchievementCanceled;
+   
 
     public IReadOnlyList<Quest> ActiveQuests => activeQuests;
     public IReadOnlyList<Quest> CompletedQuests => completedQuests;
@@ -70,6 +70,10 @@ public class QuestSystem : MonoBehaviour
     {
         questDatabase = Resources.Load<QuestDatabase>("QuestDatabase");
         achievementDatabase = Resources.Load<QuestDatabase>("AchievementDatabase");
+
+        foreach (var achievement in achievementDatabase.Quests)
+            Register(achievement);
+        
     }
 
     public Quest Register(Quest quest)
@@ -99,6 +103,23 @@ public class QuestSystem : MonoBehaviour
         return newQuest;
     }
 
+    public void ReceiveReport(string category, object target, int successCount)
+    {
+        ReceiveReport(activeQuests, category, target, successCount);
+        ReceiveReport(activeAchievements, category, target, successCount);
+    }
+    public void ReceiveReport(Category category, TaskTarget target, int successCount)
+        => ReceiveReport(category.CodeName, target.Value, successCount);
+
+    
+    private void ReceiveReport(List<Quest> quests, string category, object target, int successCount)
+    {
+        foreach (var quest in quests.ToArray())
+            quest.ReceiveReport(category, target, successCount);
+    }
+
+
+    public bool ContainsInAchievements(Quest quest) => activeQuests.Any(x => x.CodeName == quest.CodeName);
     #region Callback
     private void OnQuestCompleted(Quest quest)
     {
@@ -119,7 +140,7 @@ public class QuestSystem : MonoBehaviour
     private void OnAchievementCompleted(Quest achievement)
     {
         activeAchievements.Remove(achievement);
-        activeAchievements.Add(achievement);
+        completedAchievements.Add(achievement);
 
         onAchievementCompleted?.Invoke(achievement);
     }
